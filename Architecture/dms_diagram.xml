@@ -1,0 +1,81 @@
+<mxfile host="app.diagrams.net" modified="2025-12-06T12:00:00.000Z" agent="5.0" version="20.5.5">
+  <diagram id="dms-full" name="DMS Full System">
+    <mxGraphModel dx="900" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Phase 1 Box -->
+        <mxCell id="phase1" value="Phase 1 - Local Prototype" style="rounded=1;strokeWidth=2;strokeColor=#1a237e;fillColor=#ffffff;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="700" height="260" as="geometry"/>
+        </mxCell>
+
+        <!-- Boxes inside Phase 1 -->
+        <mxCell id="cam" value="Mac Webcam&#10;Frames (RGB 640x480)" style="rounded=1;fillColor=#bbdefb;strokeColor=#1565c0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="150" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pre" value="Preprocessing&#10;- resize&#10;- normalize" style="rounded=1;fillColor=#fff9c4;strokeColor=#f9a825;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mediapipe" value="MediaPipe FaceMesh&#10;468 landmarks (x,y,z)" style="rounded=1;fillColor=#ffccbc;strokeColor=#d84315;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="430" y="80" width="200" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="feat" value="Feature Extraction&#10;EAR, MAR, Head Pose" style="rounded=1;fillColor=#e1bee7;strokeColor=#8e24aa;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="60" y="180" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="decision" value="Decision Engine&#10;- thresholds&#10;- state machine" style="rounded=1;fillColor=#ffe0b2;strokeColor=#ef6c00;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="180" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="logger" value="Event Logger&#10;JSON/CSV" style="rounded=1;fillColor=#c8e6c9;strokeColor=#2e7d32;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="540" y="180" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Phase 1 Arrows -->
+        <mxCell id="arrow1" edge="1" parent="1" source="cam" target="pre" style="endArrow=block;strokeColor=#000000"/>
+        <mxCell id="arrow2" edge="1" parent="1" source="pre" target="mediapipe" style="endArrow=block;strokeColor=#000000"/>
+        <mxCell id="arrow3" edge="1" parent="1" source="mediapipe" target="feat" style="endArrow=block;strokeColor=#000000"/>
+        <mxCell id="arrow4" edge="1" parent="1" source="feat" target="decision" style="endArrow=block;strokeColor=#000000"/>
+        <mxCell id="arrow5" edge="1" parent="1" source="decision" target="logger" style="endArrow=block;strokeColor=#000000"/>
+
+        <!-- Phase 2 Box -->
+        <mxCell id="phase2" value="Phase 2 - Edge Deployment (Future)" style="rounded=1;dashed=1;strokeWidth=2;strokeColor=#4e342e;fillColor=#fafafa;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="700" height="180" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="jetson" value="Jetson Nano&#10;ONNX/TensorRT" style="rounded=1;fillColor=#dcedc8;strokeColor=#558b2f;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ircamera" value="IR Camera&#10;Night robustness" style="rounded=1;fillColor=#ffe082;strokeColor=#ffa000;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="380" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Phase 3 Box -->
+        <mxCell id="phase3" value="Phase 3 - Cloud Backend (Future)" style="rounded=1;dashed=1;strokeWidth=2;strokeColor=#004d40;fillColor=#e0f2f1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="780" y="40" width="400" height="480" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ingest" value="Ingestion API / MQTT Broker" style="rounded=1;fillColor=#b2dfdb;strokeColor=#00796b;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="800" y="80" width="360" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="tsdb" value="Time-Series DB" style="rounded=1;fillColor=#bbdefb;strokeColor=#1565c0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="800" y="180" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dash" value="Dashboard (Grafana)" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="980" y="180" width="180" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Phase 1 → Phase 3 arrow -->
+        <mxCell id="arrow6" edge="1" parent="1" source="logger" target="ingest" style="dashed=1;endArrow=block;strokeColor=#00796b"/>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
