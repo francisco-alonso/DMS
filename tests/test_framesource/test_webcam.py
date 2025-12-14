@@ -1,7 +1,7 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
-import cv2
-import time
-from unittest.mock import Mock, patch, MagicMock
+
 from src.framesource.webcam import WebcamFrameSource
 
 
@@ -112,6 +112,6 @@ class TestWebcamFrameSource:
         mock_cap.isOpened.return_value = True
         mock_video_capture.return_value = mock_cap
 
-        source = WebcamFrameSource(device_index=1)
+        WebcamFrameSource(device_index=1)
 
         mock_video_capture.assert_called_once_with(1)

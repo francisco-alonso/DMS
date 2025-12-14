@@ -1,5 +1,7 @@
-import pytest
 import math
+
+import pytest
+
 from src.feature_extractor.ear import compute_ear, euclidean_distance
 
 

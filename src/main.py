@@ -1,9 +1,9 @@
+
 import cv2
-import time
-from collections import deque
+
+from feature_extractor.ear import compute_ear
 from framesource.webcam import WebcamFrameSource
 from landmark_extractor.mediapipe_facemesh import MediaPipeFaceMeshExtractor
-from feature_extractor.ear import compute_ear
 
 LEFT_EYE_IDX = [33, 160, 158, 133, 153, 144]
 RIGHT_EYE_IDX = [362, 385, 387, 263, 373, 380]

@@ -1,7 +1,8 @@
-import pytest
-import numpy as np
+from unittest.mock import MagicMock, patch
+
 import cv2
-from unittest.mock import Mock, patch, MagicMock
+import numpy as np
+
 from src.landmark_extractor.mediapipe_facemesh import MediaPipeFaceMeshExtractor
 
 
@@ -31,7 +32,7 @@ class TestMediaPipeFaceMeshExtractor:
         mock_face_mesh = MagicMock()
         mock_face_mesh_module.FaceMesh = MagicMock(return_value=mock_face_mesh)
 
-        extractor = MediaPipeFaceMeshExtractor(
+        MediaPipeFaceMeshExtractor(
             max_num_faces=2,
             min_detection_confidence=0.7,
             min_tracking_confidence=0.8,
