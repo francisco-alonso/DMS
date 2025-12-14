@@ -1,4 +1,3 @@
-
 import cv2
 
 from feature_extractor.ear import compute_ear
