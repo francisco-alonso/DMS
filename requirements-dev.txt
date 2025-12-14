@@ -1,0 +1,13 @@
+# Development and testing dependencies
+# Install with: pip install -r requirements-dev.txt
+
+# Include production dependencies
+-r requirements.txt
+
+# Testing
+pytest==8.3.4
+pytest-cov==6.0.0
+
+# Code quality
+black==24.10.0
+ruff==0.6.9
