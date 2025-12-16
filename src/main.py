@@ -1,5 +1,6 @@
 import cv2
 
+from decision_engine.time_consecutive import TimeConsecutiveDecisionEngine
 from feature_extractor.ear import compute_ear
 from framesource.webcam import WebcamFrameSource
 from landmark_extractor.mediapipe_facemesh import MediaPipeFaceMeshExtractor
@@ -11,6 +12,9 @@ RIGHT_EYE_IDX = [362, 385, 387, 263, 373, 380]
 def main():
     source = WebcamFrameSource(device_index=0)
     landmark_extractor = MediaPipeFaceMeshExtractor()
+    decision_engine = TimeConsecutiveDecisionEngine(
+        ear_threshold=0.35, min_closed_time_sec=1.5  # provisional  # provisional
+    )
 
     while True:
         frame = source.read()
@@ -31,6 +35,9 @@ def main():
             ear_left = compute_ear(left_eye)
             ear_right = compute_ear(right_eye)
             ear_avg = (ear_left + ear_right) / 2.0
+            decision = decision_engine.update(
+                ear=ear_avg, timestamp_ms=frame["timestamp_ms"]
+            )
 
             # Draw LEFT eye landmarks (green)
             for idx in LEFT_EYE_IDX:
@@ -48,7 +55,7 @@ def main():
 
         cv2.putText(
             image,
-            f"EAR (avg): {ear_avg:.3f}",
+            f"State: {decision['state']} ({decision['closed_time_sec']:.2f}s)",
             (20, 40),
             cv2.FONT_HERSHEY_SIMPLEX,
             1,
