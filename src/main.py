@@ -13,10 +13,8 @@ def main():
     source = WebcamFrameSource(device_index=0)
     landmark_extractor = MediaPipeFaceMeshExtractor()
     decision_engine = TimeConsecutiveDecisionEngine(
-        ear_threshold=0.35,          # provisional
-        min_closed_time_sec=1.5      # provisional
+        ear_threshold=0.35, min_closed_time_sec=1.5  # provisional  # provisional
     )
-
 
     while True:
         frame = source.read()
@@ -38,10 +36,8 @@ def main():
             ear_right = compute_ear(right_eye)
             ear_avg = (ear_left + ear_right) / 2.0
             decision = decision_engine.update(
-                ear=ear_avg,
-                timestamp_ms=frame["timestamp_ms"]
+                ear=ear_avg, timestamp_ms=frame["timestamp_ms"]
             )
-
 
             # Draw LEFT eye landmarks (green)
             for idx in LEFT_EYE_IDX:
